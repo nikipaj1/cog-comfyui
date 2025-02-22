@@ -25,7 +25,7 @@ ALL_DIRECTORIES = [OUTPUT_DIR, INPUT_DIR, COMFYUI_TEMP_OUTPUT_DIR]
 IMAGE_TYPES = [".jpg", ".jpeg", ".png", ".webp"]
 VIDEO_TYPES = [".mp4", ".mov", ".avi", ".mkv"]
 
-with open("examples/api_workflows/instantid_default_api.json", "r") as file:
+with open("examples/api_workflows/catvton_api.json", "r") as file:
     EXAMPLE_WORKFLOW_JSON = file.read()
 
 
@@ -105,8 +105,12 @@ class Predictor(BasePredictor):
             description="Your ComfyUI workflow as JSON string or URL. You must use the API version of your workflow. Get it from ComfyUI using 'Save (API format)'. Instructions here: https://github.com/fofr/cog-comfyui",
             default="",
         ),
-        input_file: Path = Input(
-            description="Input image, video, tar or zip file. Read guidance on workflows and input files here: https://github.com/fofr/cog-comfyui. Alternatively, you can replace inputs with URLs in your JSON workflow and the model will download them.",
+        reference_image: Path = Input(
+            description="The image of the person who will try on the clothing. Should be a full-body photo with clear view.",
+            default=None,
+        ),
+        clothing_image: Path = Input(
+            description="The image of the clothing item to be virtually tried on. Should be a clean, front-facing photo of the garment.",
             default=None,
         ),
         return_temp_files: bool = Input(
@@ -127,8 +131,10 @@ class Predictor(BasePredictor):
         """Run a single prediction on the model"""
         self.comfyUI.cleanup(ALL_DIRECTORIES)
 
-        if input_file:
-            self.handle_input_file(input_file)
+        if reference_image:
+            self.handle_input_file(reference_image)
+        if clothing_image:
+            self.handle_input_file(clothing_image)
 
         workflow_json_content = workflow_json
         if workflow_json.startswith(("http://", "https://")):
