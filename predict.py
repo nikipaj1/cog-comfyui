@@ -101,17 +101,11 @@ class Predictor(BasePredictor):
 
     def predict(
         self,
+        reference: Path = Input(description="Reference image"),
+        clothing: Path = Input(description="Clothing image"),
         workflow_json: str = Input(
             description="Your ComfyUI workflow as JSON string or URL. You must use the API version of your workflow. Get it from ComfyUI using 'Save (API format)'. Instructions here: https://github.com/fofr/cog-comfyui",
             default="",
-        ),
-        reference_image: Path = Input(
-            description="The image of the person who will try on the clothing. Should be a full-body photo with clear view.",
-            default=None,
-        ),
-        clothing_image: Path = Input(
-            description="The image of the clothing item to be virtually tried on. Should be a clean, front-facing photo of the garment.",
-            default=None,
         ),
         return_temp_files: bool = Input(
             description="Return any temporary files, such as preprocessed controlnet images. Useful for debugging.",
@@ -131,10 +125,19 @@ class Predictor(BasePredictor):
         """Run a single prediction on the model"""
         self.comfyUI.cleanup(ALL_DIRECTORIES)
 
-        if reference_image:
-            self.handle_input_file(reference_image)
-        if clothing_image:
-            self.handle_input_file(clothing_image)
+        # Create input directory if it doesn't exist
+        os.makedirs(INPUT_DIR, exist_ok=True)
+
+        # Copy files with specific names
+        reference_path = os.path.join(
+            INPUT_DIR, "reference" + os.path.splitext(reference)[1]
+        )
+        clothing_path = os.path.join(
+            INPUT_DIR, "clothing" + os.path.splitext(clothing)[1]
+        )
+
+        shutil.copy(reference, reference_path)
+        shutil.copy(clothing, clothing_path)
 
         workflow_json_content = workflow_json
         if workflow_json.startswith(("http://", "https://")):

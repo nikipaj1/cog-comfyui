@@ -18,8 +18,9 @@ build:
     - cython
     - pycocotools
 
-    # Detectron2 and DensePose
-    - "git+https://github.com/facebookresearch/detectron2.git@v0.6"
+    # Detectron2 first
+    - "git+https://github.com/facebookresearch/detectron2.git@v0.6#subdirectory=projects/DensePose"
+    # - "git+https://github.com/facebookresearch/detectron2.git@v0.6&_pip_args=--no-deps"
 
     # Rest of the dependencies
     - torchsde

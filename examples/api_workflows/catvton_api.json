@@ -2,21 +2,22 @@
   "10": {
     "class_type": "LoadImage",
     "inputs": {
-      "image": "reference[0]",
+      "image": "reference.jpg",
       "upload": "image"
     }
   },
   "11": {
     "class_type": "LoadImage",
     "inputs": {
-      "image": "clothing[0]",
+      "image": "clothing.png",
       "upload": "image"
     }
   },
   "12": {
     "class_type": "LoadAutoMasker",
     "inputs": {
-      "model_name": "zhengchong/CatVTON"
+      "model_name": "zhengchong/CatVTON",
+      "catvton_path": "zhengchong/CatVTON"
     }
   },
   "13": {
@@ -24,7 +25,8 @@
     "inputs": {
       "pipe": ["12", 0],
       "target_image": ["10", 0],
-      "mask_type": "overall"
+      "mask_type": "upper",
+      "cloth_type": "upper"
     }
   },
   "14": {
@@ -49,7 +51,8 @@
       "seed": 42,
       "mode": "fixed",
       "denoise": 50,
-      "cfg": 2.5
+      "cfg": 2.5,
+      "steps": 50
     }
   },
   "17": {
@@ -57,7 +60,10 @@
     "inputs": {
       "base_model_name": "runwayml/stable-diffusion-inpainting",
       "model_name": "zhengchong/CatVTON",
-      "model_precision": "bf16"
+      "model_precision": "bf16",
+      "catvton_path": "zhengchong/CatVTON",
+      "mixed_precision": "bf16",
+      "sd15_inpaint_path": "runwayml/stable-diffusion-inpainting"
     }
   },
   "18": {
