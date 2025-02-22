@@ -3,11 +3,25 @@ build:
   cuda: "12.1"
   system_packages:
     - ffmpeg
-  python_version: "3.12"
+    - "libgl1-mesa-glx"
+    - "libglib2.0-0"
+    - "ninja-build"
+  python_version: "3.11"
   python_packages:
-    - torch
+    # Core ML dependencies - must be first
+    - torch==2.2.0
     - torchvision
     - torchaudio
+
+    # Build dependencies for detectron2
+    - numpy
+    - cython
+    - pycocotools
+
+    # Detectron2 and DensePose
+    - "git+https://github.com/facebookresearch/detectron2.git@v0.6"
+
+    # Rest of the dependencies
     - torchsde
     - einops
     - transformers>=4.39.3
@@ -73,7 +87,6 @@ build:
     - importlib_metadata
     - opencv-python-headless>=4.0.1.24
     - filelock
-    - numpy
     - scikit-image
     - python-dateutil
     - mediapipe
@@ -102,6 +115,11 @@ build:
 
     # ComfyUI-segment-anything-2
     - iopath
+
+    # ComfyUI-CatVTON
+    # - git+https://github.com/facebookresearch/detectron2.git@v0.6
+    # - git+https://github.com/facebookresearch/detectron2.git@v0.6#subdirectory=projects/DensePose
+
   run:
     - curl -o /usr/local/bin/pget -L "https://github.com/replicate/pget/releases/latest/download/pget_$(uname -s)_$(uname -m)" && chmod +x /usr/local/bin/pget
     - pip install onnxruntime-gpu --extra-index-url https://aiinfra.pkgs.visualstudio.com/PublicPackages/_packaging/onnxruntime-cuda-12/pypi/simple/

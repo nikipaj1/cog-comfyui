@@ -1,3 +1,6 @@
+## 2025-02-22
+
+- [Add Comfyui-CatVTON](https://github.com/pzc163/Comfyui-CatVTON) custom node
 
 ## 2025-02-19
 
@@ -236,7 +239,7 @@ Custom nodes updated:
 
 ## 2024-12-10
 
-- [Add Sketch_Illustration_Style_LoRA_-_Pony_V6_XL.safetensors to loras](https://civitai.com/api/download/models/882225?type=Model&format=SafeTensor)
+- [Add Sketch*Illustration_Style_LoRA*-\_Pony_V6_XL.safetensors to loras](https://civitai.com/api/download/models/882225?type=Model&format=SafeTensor)
 - [Add Smooth_Anime_2_Style_SDXL_LoRA_Pony_Diffusion_V6_XL.safetensors to loras](https://civitai.com/api/download/models/333607?type=Model&format=SafeTensor)
 - [Add Ton618-Epic-Realism-Flux-LoRA.safetensors to loras](https://huggingface.co/prithivMLmods/Ton618-Epic-Realism-Flux-LoRA)
 - [Add Canopus-LoRA-Flux-UltraRealism.safetensors to loras](https://huggingface.co/prithivMLmods/Canopus-LoRA-Flux-UltraRealism-2.0)
@@ -247,6 +250,7 @@ Custom nodes updated:
 - [Add hunyuan_video_720_fp8_e4m3fn.safetensors to diffusion_models](https://huggingface.co/Kijai/HunyuanVideo_comfy)
 
 ## 2024-11-28
+
 - [Add flux1-schnell-fp8-e4m3fn.safetensors to diffusion_models](https://huggingface.co/Kijai/flux-fp8/resolve/main/flux1-schnell-fp8-e4m3fn.safetensors?download=true)
 
 More flux-dev weights:
@@ -329,6 +333,7 @@ Add In-Context-LoRA:
 - [Updated ComfyUI-Logic](https://github.com/theUpsider/ComfyUI-Logic/compare/fb88973...42d4f3d)
 
 New weights:
+
 - [Add mochi_preview_fp8_scaled.safetensors to diffusion_models](https://huggingface.co/Comfy-Org/mochi_preview_repackaged)
 - [Add mochi_preview_bf16.safetensors to diffusion_models](https://huggingface.co/Comfy-Org/mochi_preview_repackaged)
 - [Add mochi_vae.safetensors to vae](https://huggingface.co/Comfy-Org/mochi_preview_repackaged)
@@ -529,6 +534,7 @@ Update custom nodes:
 ## 2024-08-22
 
 - [Add flux1-dev-fp8.safetensors to diffusion_models](https://huggingface.co/Kijai/flux-fp8/resolve/main/flux1-dev-fp8.safetensors?download=true)
+
 ## 2024-08-21
 
 - [Update ComfyUI](https://github.com/comfyanonymous/ComfyUI/compare/3f5939a...5e806f5)
@@ -561,6 +567,7 @@ Update custom nodes:
 ## 2024-08-08
 
 - Add flux weights:
+
   - flux1-dev.safetensors
   - flux1-schnell.safetensors
   - ae.safetensors
@@ -608,6 +615,7 @@ BrushNet weights:
 ## 2024-07-23
 
 - [Add comfyui-inpaint-nodes](https://github.com/Acly/comfyui-inpaint-nodes) and weights:
+
   - big-lama.pt
   - fooocus_inpaint_head.pth
   - fooocus_lama.safetensors
@@ -618,7 +626,7 @@ BrushNet weights:
   - Places_512_FullData_G.pth
 
 - [Add PhotoMaker v2 (photomaker-v2.bin
-)](https://huggingface.co/TencentARC/PhotoMaker-V2)
+  )](https://huggingface.co/TencentARC/PhotoMaker-V2)
 
 ## 2024-07-22
 
@@ -1103,7 +1111,7 @@ New embeddings:
 
 - Update ComfyUI [to latest (6c6a392)](https://github.com/comfyanonymous/ComfyUI/commit/6c6a39251fe313c56a88c90d820009073b623dfe)
 - Update to latest [IPAdapter Plus (
-1ac1cae)](https://github.com/cubiq/ComfyUI_IPAdapter_plus) (breaking changes, custom nodes re-written)
+  1ac1cae)](https://github.com/cubiq/ComfyUI_IPAdapter_plus) (breaking changes, custom nodes re-written)
 
 ## 2024-03-20
 

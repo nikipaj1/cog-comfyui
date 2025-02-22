@@ -13,19 +13,25 @@ MODELS = [
 class ComfyUI_CatVTON(CustomNodeHelper):
     @staticmethod
     def models():
-        return MODELS
+        # return MODELS
+        return []
 
     @staticmethod
     def add_weights(weights_to_download, node):
-        if node.is_type_in(["CatVTONLoader", "CatVTONMobileLoader"]):
-            weights_to_download.extend(MODELS)
+        pass
+        # if node.is_type_in(
+        #     ["LoadAutoMasker", "LoadCatVTONPipeline", "AutoMasker", "CatVTON"]
+        # ):
+        #     weights_to_download.extend(MODELS)
 
     @staticmethod
     def weights_map(base_url):
-        return {
-            model: {
-                "url": f"{base_url}/custom_nodes/Comfyui-CatVTON/checkpoints/{model}.tar",
-                "dest": "ComfyUI/custom_nodes/Comfyui-CatVTON/checkpoints",
-            }
-            for model in MODELS
-        }
+        # hf_base = "https://huggingface.co/zhengchong/CatVTON/resolve/main"
+        # return {
+        #     model: {
+        #         "url": f"{hf_base}/{model}",
+        #         "dest": "ComfyUI/custom_nodes/Comfyui-CatVTON/model",
+        #     }
+        #     for model in MODELS
+        # }
+        return {}
