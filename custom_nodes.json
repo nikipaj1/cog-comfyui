@@ -246,5 +246,9 @@
   {
     "repo": "https://github.com/TTPlanetPig/Comfyui_TTP_Toolset",
     "commit": "13bd85f"
+  },
+  {
+    "repo": "https://github.com/pzc163/Comfyui-CatVTON",
+    "commit": "6ffd4a4"
   }
 ]
