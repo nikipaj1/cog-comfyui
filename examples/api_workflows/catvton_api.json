@@ -51,7 +51,7 @@
       "seed": 42,
       "mode": "fixed",
       "denoise": 50,
-      "cfg": 2.5,
+      "cfg": 3.5,
       "steps": 50
     }
   },
@@ -60,9 +60,9 @@
     "inputs": {
       "base_model_name": "runwayml/stable-diffusion-inpainting",
       "model_name": "zhengchong/CatVTON",
-      "model_precision": "bf16",
+      "model_precision": "fp16",
       "catvton_path": "zhengchong/CatVTON",
-      "mixed_precision": "bf16",
+      "mixed_precision": "fp16",
       "sd15_inpaint_path": "runwayml/stable-diffusion-inpainting"
     }
   },

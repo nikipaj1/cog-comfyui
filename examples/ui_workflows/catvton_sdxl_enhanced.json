@@ -1,0 +1,222 @@
+{
+  "10": {
+    "inputs": {
+      "image": "clipspace/clipspace-mask-86486491.39999998.png [input]",
+      "upload": "image"
+    },
+    "class_type": "LoadImage"
+  },
+  "11": {
+    "inputs": {
+      "image": "Veste_de_baseball_dcontracte_et_sportive__col_montant_en_plein_air_couleur_unie_fermeture_clair__SHEIN_main_0.webp",
+      "upload": "image"
+    },
+    "class_type": "LoadImage"
+  },
+  "12": {
+    "inputs": {}
+  },
+  "13": {
+    "inputs": {
+      "pipe": ["12", 0],
+      "target_image": ["46", 0]
+    }
+  },
+  "14": {
+    "inputs": {
+      "images": ["13", 1]
+    },
+    "class_type": "PreviewImage"
+  },
+  "15": {
+    "inputs": {
+      "images": ["13", 0]
+    },
+    "class_type": "PreviewImage"
+  },
+  "16": {
+    "inputs": {
+      "pipe": ["17", 0],
+      "target_image": ["46", 0],
+      "refer_image": ["11", 0],
+      "mask_image": ["13", 0]
+    }
+  },
+  "17": {
+    "inputs": {}
+  },
+  "18": {
+    "inputs": {
+      "images": ["16", 0]
+    },
+    "class_type": "PreviewImage"
+  },
+  "25": {
+    "inputs": {
+      "mask": ["27", 0]
+    }
+  },
+  "27": {
+    "inputs": {
+      "image": ["13", 0]
+    }
+  },
+  "28": {
+    "inputs": {
+      "ckpt_name": "juggernautXL_juggXIByRundiffusion.safetensors"
+    },
+    "class_type": "CheckpointLoaderSimple"
+  },
+  "29": {
+    "inputs": {
+      "text": ["45", 0],
+      "clip": ["28", 1]
+    },
+    "class_type": "CLIPTextEncode"
+  },
+  "30": {
+    "inputs": {
+      "text": "",
+      "clip": ["28", 1]
+    },
+    "class_type": "CLIPTextEncode"
+  },
+  "31": {
+    "inputs": {
+      "seed": 7867687,
+      "steps": 30,
+      "cfg": 3.5,
+      "sampler_name": "dpmpp_sde",
+      "scheduler": "karras",
+      "denoise": 0.4,
+      "model": ["36", 0],
+      "positive": ["29", 0],
+      "negative": ["30", 0],
+      "latent_image": ["35", 0]
+    },
+    "class_type": "KSampler"
+  },
+  "32": {
+    "inputs": {
+      "samples": ["31", 0],
+      "vae": ["28", 2]
+    },
+    "class_type": "VAEDecode"
+  },
+  "33": {
+    "inputs": {
+      "filename_prefix": "ComfyUI",
+      "images": ["32", 0]
+    },
+    "class_type": "SaveImage"
+  },
+  "34": {
+    "inputs": {
+      "pixels": ["40", 0],
+      "vae": ["28", 2]
+    },
+    "class_type": "VAEEncode"
+  },
+  "35": {
+    "inputs": {
+      "samples": ["34", 0],
+      "mask": ["41", 0]
+    },
+    "class_type": "SetLatentNoiseMask"
+  },
+  "36": {
+    "inputs": {
+      "model": ["37", 0],
+      "ipadapter": ["37", 1],
+      "image": ["11", 0],
+      "attn_mask": ["27", 0]
+    }
+  },
+  "37": {
+    "inputs": {
+      "model": ["28", 0]
+    }
+  },
+  "38": {
+    "inputs": {
+      "rgthree_comparer": {
+        "images": [
+          {
+            "name": "A",
+            "selected": true,
+            "url": "/api/view?filename=rgthree.compare._temp_xfxqc_00005_.png&type=temp&subfolder=&rand=0.8031914080431928"
+          },
+          {
+            "name": "B",
+            "selected": true,
+            "url": "/api/view?filename=rgthree.compare._temp_xfxqc_00006_.png&type=temp&subfolder=&rand=0.9954941402052169"
+          }
+        ]
+      },
+      "image_a": ["16", 0],
+      "image_b": ["32", 0]
+    },
+    "class_type": "Image Comparer (rgthree)"
+  },
+  "40": {
+    "inputs": {
+      "x": 0,
+      "y": 0,
+      "resize_source": false,
+      "destination": ["46", 0],
+      "source": ["16", 0],
+      "mask": ["41", 0]
+    },
+    "class_type": "ImageCompositeMasked"
+  },
+  "41": {
+    "inputs": {
+      "amount": 10,
+      "device": "auto",
+      "mask": ["27", 0]
+    },
+    "class_type": "MaskBlur+"
+  },
+  "42": {
+    "inputs": {
+      "images": ["40", 0]
+    },
+    "class_type": "PreviewImage"
+  },
+  "43": {
+    "inputs": {
+      "image": ["11", 0],
+      "florence2_model": ["44", 0]
+    }
+  },
+  "44": {
+    "inputs": {}
+  },
+  "45": {
+    "inputs": {
+      "text": ["43", 2],
+      "text2": "The image shows a navy blue bomber jacket with a black collar and cuffs, set against a white background. The jacket has a classic bomber style with a ribbed collar, cuffs and hem, and two side pockets. The fabric is lightweight and comfortable, perfect for any occasion."
+    },
+    "class_type": "ShowText|pysssss"
+  },
+  "46": {
+    "inputs": {
+      "width": 768,
+      "height": 1024,
+      "upscale_method": "nearest-exact",
+      "keep_proportion": false,
+      "divisible_by": 2,
+      "crop": "center",
+      "image": ["10", 0]
+    },
+    "class_type": "ImageResizeKJ"
+  },
+  "54": {
+    "inputs": {
+      "MODEL": ["28", 0],
+      "CLIP": ["28", 1],
+      "VAE": ["28", 2]
+    },
+    "class_type": "Anything Everywhere3"
+  }
+}

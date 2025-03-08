@@ -250,5 +250,9 @@
   {
     "repo": "https://github.com/pzc163/Comfyui-CatVTON",
     "commit": "6ffd4a4"
+  },
+  {
+    "repo": "git@github.com:chrisgoringe/cg-use-everywhere.git",
+    "commit": "8017bc6"
   }
 ]
