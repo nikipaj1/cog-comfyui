@@ -14,25 +14,26 @@
     }
   },
   "12": {
+    "class_type": "LoadAutoMasker",
     "inputs": {
-      "class_type": "LoadAutoMasker",
-      "inputs": {
-        "model_name": "zhengchong/CatVTON",
-        "catvton_path": "zhengchong/CatVTON"
-      }
+      "model_name": "zhengchong/CatVTON",
+      "catvton_path": "zhengchong/CatVTON"
     }
   },
   "13": {
+    "class_type": "AutoMasker",
     "inputs": {
       "pipe": ["12", 0],
-      "target_image": ["46", 0]
+      "target_image": ["46", 0],
+      "mask_type": "overall",
+      "cloth_type": "overall"
     }
   },
   "14": {
+    "class_type": "PreviewImage",
     "inputs": {
       "images": ["13", 1]
-    },
-    "class_type": "PreviewImage"
+    }
   },
   "15": {
     "inputs": {
@@ -41,61 +42,63 @@
     "class_type": "PreviewImage"
   },
   "16": {
+    "class_type": "CatVTON",
     "inputs": {
       "pipe": ["17", 0],
       "target_image": ["46", 0],
       "refer_image": ["11", 0],
-      "mask_image": ["13", 0]
+      "mask_image": ["13", 0],
+      "cfg": 3.5,
+      "steps": 50,
+      "seed": 42
     }
   },
   "17": {
+    "class_type": "LoadCatVTONPipeline",
     "inputs": {
-      "class_type": "LoadCatVTONPipeline",
-      "inputs": {
-        "base_model_name": "runwayml/stable-diffusion-inpainting",
-        "model_name": "zhengchong/CatVTON",
-        "model_precision": "fp16",
-        "catvton_path": "zhengchong/CatVTON",
-        "mixed_precision": "fp16",
-        "sd15_inpaint_path": "runwayml/stable-diffusion-inpainting"
-      }
+      "base_model_name": "runwayml/stable-diffusion-inpainting",
+      "model_name": "zhengchong/CatVTON",
+      "model_precision": "fp16",
+      "catvton_path": "zhengchong/CatVTON",
+      "mixed_precision": "fp16",
+      "sd15_inpaint_path": "runwayml/stable-diffusion-inpainting"
     }
   },
   "18": {
+    "class_type": "PreviewImage",
     "inputs": {
       "images": ["16", 0]
-    },
-    "class_type": "PreviewImage"
-  },
-  "25": {
-    "inputs": {
-      "mask": ["27", 0]
     }
   },
   "27": {
     "inputs": {
+      "method": "intensity",
       "image": ["13", 0]
+    },
+    "class_type": "Image To Mask",
+    "_meta": {
+      "title": "Image To Mask"
     }
   },
   "28": {
+    "class_type": "CheckpointLoaderSimple",
     "inputs": {
-      "ckpt_name": "juggernautXL_juggXIByRundiffusion.safetensors"
-    },
-    "class_type": "CheckpointLoaderSimple"
+      "ckpt_name": "juggernautXL_v8Rundiffusion.safetensors"
+    }
   },
   "29": {
+    "class_type": "CLIPTextEncode",
     "inputs": {
       "text": ["45", 0],
       "clip": ["28", 1]
-    },
-    "class_type": "CLIPTextEncode"
+    }
   },
   "30": {
+    "class_type": "CLIPTextEncode",
     "inputs": {
       "text": "",
       "clip": ["28", 1]
-    },
-    "class_type": "CLIPTextEncode"
+    }
   },
   "31": {
     "inputs": {
@@ -142,15 +145,30 @@
   },
   "36": {
     "inputs": {
+      "weight": 0.8,
+      "weight_type": "linear",
+      "combine_embeds": "concat",
+      "start_at": 0,
+      "end_at": 1,
+      "embeds_scaling": "V only",
       "model": ["37", 0],
       "ipadapter": ["37", 1],
       "image": ["11", 0],
       "attn_mask": ["27", 0]
+    },
+    "class_type": "IPAdapterAdvanced",
+    "_meta": {
+      "title": "IPAdapter Advanced"
     }
   },
   "37": {
     "inputs": {
+      "preset": "PLUS (high strength)",
       "model": ["28", 0]
+    },
+    "class_type": "IPAdapterUnifiedLoader",
+    "_meta": {
+      "title": "IPAdapter Unified Loader"
     }
   },
   "38": {
@@ -201,8 +219,21 @@
   },
   "43": {
     "inputs": {
+      "text_input": "",
+      "task": "detailed_caption",
+      "fill_mask": true,
+      "keep_model_loaded": false,
+      "max_new_tokens": 1024,
+      "num_beams": 3,
+      "do_sample": true,
+      "output_mask_select": "",
+      "seed": 178128789115776,
       "image": ["11", 0],
       "florence2_model": ["44", 0]
+    },
+    "class_type": "Florence2Run",
+    "_meta": {
+      "title": "Florence2Run"
     }
   },
   "44": {
@@ -219,7 +250,7 @@
   "45": {
     "inputs": {
       "text": ["43", 2],
-      "text2": ""
+      "text2": "clothing"
     },
     "class_type": "ShowText|pysssss"
   },
