@@ -25,7 +25,7 @@ ALL_DIRECTORIES = [OUTPUT_DIR, INPUT_DIR, COMFYUI_TEMP_OUTPUT_DIR]
 IMAGE_TYPES = [".jpg", ".jpeg", ".png", ".webp"]
 VIDEO_TYPES = [".mp4", ".mov", ".avi", ".mkv"]
 
-with open("examples/api_workflows/catvton_sdxl_enhanced_api.json", "r") as file:
+with open("examples/api_workflows/catvton_api.json", "r") as file:
     EXAMPLE_WORKFLOW_JSON = file.read()
 
 
@@ -129,15 +129,26 @@ class Predictor(BasePredictor):
         os.makedirs(INPUT_DIR, exist_ok=True)
 
         # Copy files with specific names
-        reference_path = os.path.join(
-            INPUT_DIR, "reference" + os.path.splitext(reference)[1]
-        )
-        clothing_path = os.path.join(
-            INPUT_DIR, "clothing" + os.path.splitext(clothing)[1]
-        )
+        # reference_path = os.path.join(
+        #     INPUT_DIR, "reference" + os.path.splitext(reference)[1]
+        # )
+        # clothing_path = os.path.join(
+        #     INPUT_DIR, "clothing" + os.path.splitext(clothing)[1]
+        # )
+        # shutil.copy(reference, reference_path)
+        # shutil.copy(clothing, clothing_path)
 
-        shutil.copy(reference, reference_path)
-        shutil.copy(clothing, clothing_path)
+        # Convert input images to PNG with 100% quality and use fixed filenames
+        reference_png_path = os.path.join(INPUT_DIR, "reference.png")
+        clothing_png_path = os.path.join(INPUT_DIR, "clothing.png")
+
+        # Convert reference image to PNG
+        reference_img = Image.open(reference)
+        reference_img.save(reference_png_path, format="PNG")
+
+        # Convert clothing image to PNG
+        clothing_img = Image.open(clothing)
+        clothing_img.save(clothing_png_path, format="PNG")
 
         workflow_json_content = workflow_json
         if workflow_json.startswith(("http://", "https://")):
